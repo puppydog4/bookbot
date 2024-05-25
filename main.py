@@ -1,9 +1,19 @@
 from collections import Counter
-def  main():
-    with open("books/frankestein.txt") as f:
-        book_contents = f.read()
-        books = Counter(char for char in book_contents.lower() if char.isalpha())
-        character_count = sorted(books.items(), reverse=True)
-        print(character_count)
+def  main(path_to_file):
+    #read file
+    with open(path_to_file) as file:
+        text = file.read()
+        #count number of words
+        words = text.split()
+        num_words = len(words)
+        #count number of letters and return them in a dictionary , all in lowercase
+        char_count = Counter(text.lower())
+        #print a report of the number of words
+        print(f"Number of words: {num_words}")
+        #print each letter found as "the "x" character was fond xxx times" only for letters in descending order
+        for letter, count in char_count.most_common():
+            if letter.isalpha():
+                 print(f"The '{letter}' character was found {count} times")
 
-main()
+#call the function using books/frankenstein.txt
+main("./books/frankestein.txt")
